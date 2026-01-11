@@ -1,6 +1,10 @@
+streamlit
 langchain-groq
 langgraph
 langchain_core
 python-dotenv
+certifi
+httpx
+pydantic
 fastapi
 uvicorn

@@ -16,11 +16,11 @@ if not api_key:
 llm= ChatGroq(
     temperature=0.7,
     groq_api_key=api_key,
-    model_name="llama3-8b-8192"
+    model_name="llama-3.3-70b-versatile"
 )
 
 # Testing
-question= "I am craving Veg Momos. Give me suggestion for a healthy swap option."
+question= "I am craving for some chips or snacks. Give me suggestion for a healthy swap options available on 10min Delivery apps like Blinkit, Zepto, like the brand Sweet Karam Coffee.."
 print(f"User: {question}")
 print("Agent Thinking....")
 
