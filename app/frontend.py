@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.absppath(__file__))))
+
 import streamlit as st
 from app.graph import app as agent_app
 
