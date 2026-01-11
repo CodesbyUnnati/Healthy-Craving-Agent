@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "healthy-agent.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
       {{- include "healthy-agent.selectorLabels" . | nindent 6 }}
@@ -14,26 +14,22 @@ spec:
       labels:
         {{- include "healthy-agent.labels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ include "healthy-agent.serviceAccountName" . }}
+      serviceAccountName: default
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: IfNotPresent
           ports:
             - name: http
               containerPort: 8000
               protocol: TCP
-          
           env:
             - name: GROQ_API_KEY
               value: {{ .Values.env.GROQ_API_KEY | quote }}
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: http
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
